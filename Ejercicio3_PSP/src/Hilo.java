@@ -1,34 +1,30 @@
 public class Hilo extends Thread {
-    public Hilo(String str) {
+    private int i;
+    static int contador=2;
+    public Hilo(String str, boolean contador) {
         super(str);
     }
 
     @Override
     public void run() {
-        System.out.println(getName() + " comenzó.");
+        Hilo hilo2= new Hilo("hilo"+contador,true);
+        if(contador<=5){
+            hilo2.start();
+            contador++;
+        }
 
-        for (int i = 1; i < 10; i++) {
-            System.out.println(getName() + " está procesando (" + i + "/" + 10 + ")");
+        for (i = 1; i <= 10; i++) {
+            System.out.println(i + " " + getName());
             try {
-                Hilo.sleep((long) Math.random() * 1000 + 500);
-            } catch (InterruptedException e) {
-            }
-            System.out.println(getName() + " finalizó.");
-
-            // Crear hilo hijo
-            String[] parts = getName().split(" ");
-            int getNumHilo = Integer.parseInt(parts[1]);
-            if (getNumHilo < 5) {
-                Hilo hiloHijo = new Hilo("Hilo " + (getNumHilo + 1));
-                hiloHijo.start();
-
-                // Esperar a que el hilo hijo termine
-                try {
-                    hiloHijo.join();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
+                Thread.sleep(((int) (Math.random() * 6 + 1)) * 100);
+            } catch (InterruptedException ex) {
             }
         }
+        try {
+            hilo2.join();
+        } catch (InterruptedException ex) {
+        }
+        System.out.println("Termina thread " + getName());
     }
 }
+

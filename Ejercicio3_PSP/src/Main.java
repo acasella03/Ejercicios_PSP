@@ -1,7 +1,10 @@
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
 
-       Hilo hilo1= new Hilo("Hilo 1");
-       hilo1.start();
+        Hilo h1 = new Hilo("hilo1", true);
+        h1.start();
+        h1.join();
+        System.out.println("Termina thread main");
+
     }
 }
