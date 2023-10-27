@@ -1,12 +1,12 @@
 /**
  * Extiende de Thread para contar las vocales
  */
-public class VowelCounter extends Thread {
+public class ContadorHilo extends Thread {
     private String texto;
     private char vocal;
     private Contador contador;
 
-    public VowelCounter(String texto, char vocal, Contador contador) {
+    public ContadorHilo(String texto, char vocal, Contador contador) {
         this.texto = texto;
         this.vocal = vocal;
         this.contador = contador;

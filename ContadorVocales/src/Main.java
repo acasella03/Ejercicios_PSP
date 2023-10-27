@@ -16,11 +16,11 @@ public class Main {
         Contador contador = new Contador();
 
         // Creamos 5 hilos para contar las vocales y los iniciamos.
-        VowelCounter hiloA = new VowelCounter(texto, 'a', contador);
-        VowelCounter hiloE = new VowelCounter(texto, 'e', contador);
-        VowelCounter hiloI = new VowelCounter(texto, 'i', contador);
-        VowelCounter hiloO = new VowelCounter(texto, 'o', contador);
-        VowelCounter hiloU = new VowelCounter(texto, 'u', contador);
+        ContadorHilo hiloA = new ContadorHilo(texto, 'a', contador);
+        ContadorHilo hiloE = new ContadorHilo(texto, 'e', contador);
+        ContadorHilo hiloI = new ContadorHilo(texto, 'i', contador);
+        ContadorHilo hiloO = new ContadorHilo(texto, 'o', contador);
+        ContadorHilo hiloU = new ContadorHilo(texto, 'u', contador);
 
         hiloA.start();
         hiloE.start();
