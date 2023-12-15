@@ -1,15 +1,16 @@
 import java.util.ArrayList;
-import java.util.Map;
+import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 public class SuperMarket {
     private int numeroCajas;
     private ArrayList<Caja> cajas;
-    private ArrayList<Double> resultados;
+    private List<Double> resultados;
 
     public SuperMarket(int numeroCajas) {
         this.numeroCajas = numeroCajas;
         this.cajas = new ArrayList<>();
-        this.resultados = new ArrayList<>();
+        this.resultados = new CopyOnWriteArrayList<>(); // Usar CopyOnWriteArrayList
 
         for (int i = 0; i < numeroCajas; i++) {
             cajas.add(new Caja(i, this));
@@ -41,8 +42,13 @@ public class SuperMarket {
     }
 
     public synchronized void realizarPago(int clienteId, double pago) {
-        System.out.println("Cliente " + clienteId + " ha realizado un pago de " + pago + " euros.");
-        resultados.set(clienteId - 1, pago); // Actualizar el resultado del cliente
+        System.out.println("Cliente " + clienteId + " ha realizado un pago de $" + pago);
+
+        if (clienteId <= resultados.size()) {
+            resultados.set(clienteId - 1, pago); // Actualizar el resultado del cliente
+        } else {
+            resultados.add(pago); // Actualizar el resultado del cliente
+        }
     }
 
     public Caja[] getCajas() {
